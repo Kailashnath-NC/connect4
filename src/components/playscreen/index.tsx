@@ -5,7 +5,7 @@ const ROWS = 6,
   COLUMNS = 7;
 export default function PlayScreen() {
   const [board, setBoard] = useState<number[][]>(
-    Array(ROWS).fill(Array(COLUMNS).fill(0))
+    Array.from({ length: ROWS }, () => new Array(COLUMNS).fill(0))
   );
 
   function updateBoard(newBoard: number[][]) {
@@ -15,7 +15,6 @@ export default function PlayScreen() {
   return (
     <div className="playscreen">
       <Board board={board} updateBoard={updateBoard} ROWS={ROWS} />
-      <div className="temp"></div>
     </div>
   );
 }
