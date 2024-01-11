@@ -69,7 +69,7 @@ export default function Board({
       });
       // console.log(c4Array);
     });
-  }, [board, currentMove, turn]);
+  }, [board, currentMove, turn, updateWinner]);
 
   function columnFilled(cIndex: number): boolean {
     return board[0][cIndex] === 0 ? false : true;
