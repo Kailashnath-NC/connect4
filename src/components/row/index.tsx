@@ -4,10 +4,12 @@ export default function Row({
   row,
   rIndex,
   playTurn,
+  winner,
 }: {
   row: number[];
   rIndex: number;
   playTurn(index: number): void;
+  winner: 0 | 1 | 2;
 }) {
   return (
     <div className="row">
@@ -17,6 +19,7 @@ export default function Row({
           cellData={cell}
           cIndex={cIndex}
           playTurn={playTurn}
+          winner={winner}
         />
       ))}
     </div>

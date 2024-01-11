@@ -2,13 +2,15 @@ export default function Cell({
   cellData,
   cIndex,
   playTurn,
+  winner,
 }: {
   cellData: number;
   cIndex: number;
   playTurn(index: number): void;
+  winner: 0 | 1 | 2;
 }) {
   function handleTurn() {
-    playTurn(cIndex);
+    if (winner === 0) playTurn(cIndex);
   }
 
   return (

@@ -60,26 +60,75 @@ body {
 }
 
 .playscreen {
+    width: 100%;
+    height: 100%;
+    position: relative;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.notice {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 3rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(to bottom, rgba(211, 211, 211, 0.8), rgba(128, 128, 128, 0.8), rgba(211, 211, 211, 0.8));
+    border-radius: 1rem;
+    color: white;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.notice>button {
+    margin-top: 1rem;
+    background-color: greenyellow;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.89;
+    }
+}
+
+.board-wrapper {
+    width: calc(100% - 2rem);
+    aspect-ratio: 1.167;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .board {
-    width: max-content;
+    min-width: max-content;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     /* background-color: lightgray; */
 }
 
 .row {
     display: flex;
+    width: 100%;
+    height: calc(100% / 6);
 }
 
 .cell-wrapper {
     position: relative;
     border: 0.125rem solid lightgray;
-    width: 2.25rem;
-    height: 2.25rem;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    width: calc(100% / 7);
+    aspect-ratio: 1/1;
     overflow: clip;
     /* margin: 0.125rem; */
 
@@ -92,9 +141,13 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 20px solid lightgray;
-    width: 2rem;
-    height: 2rem;
+    border: 200px solid lightgray;
+    min-width: 2rem;
+    min-height: 2rem;
+    flex: 1;
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* height: 16.5vh; */
     border-radius: 50%;
     cursor: pointer;
 }
