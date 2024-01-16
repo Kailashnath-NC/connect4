@@ -4,7 +4,7 @@ import Notice from "../notice";
 import { COLUMNS, ROWS } from "../../assets/boardDimension";
 
 export default function PlayScreen() {
-  const [winner, setWinner] = useState<0 | 1 | 2>(0);
+  const [winner, setWinner] = useState<-1 | 0 | 1 | 2>(0);
   const [board, setBoard] = useState<number[][]>(
     Array.from({ length: ROWS }, () => Array(COLUMNS).fill(0))
   );
@@ -12,7 +12,7 @@ export default function PlayScreen() {
   function updateBoard(newboard: number[][]) {
     setBoard(newboard);
   }
-  function updateWinner(player: 0 | 1 | 2 = 0) {
+  function updateWinner(player: -1 | 0 | 1 | 2 = 0) {
     setWinner(player);
   }
 

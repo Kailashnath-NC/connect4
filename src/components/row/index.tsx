@@ -9,7 +9,7 @@ export default function Row({
   row: number[];
   rIndex: number;
   playTurn(index: number): void;
-  winner: 0 | 1 | 2;
+  winner: -1 | 0 | 1 | 2;
 }) {
   return (
     <div className="row">

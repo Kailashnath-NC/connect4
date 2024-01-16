@@ -5,7 +5,7 @@ export default function Notice({
   resetWinner,
   updateBoard,
 }: {
-  winner: 0 | 1 | 2;
+  winner: -1 | 0 | 1 | 2;
   resetWinner(reset?: 0): void;
   updateBoard(newBoard: number[][]): void;
 }) {
@@ -19,7 +19,12 @@ export default function Notice({
       className="notice"
       style={{ visibility: `${winner === 0 ? "hidden" : "visible"}` }}
     >
-      <span>Player {winner} has won!!🎉</span>
+      {winner == -1 ? (
+        <span>Oh Well! It's a draw🙄</span>
+      ) : (
+        <span>Player {winner} has won!!🎉</span>
+      )}
+
       <button onClick={handlePlayAgain}>Play Again</button>
     </div>
   );

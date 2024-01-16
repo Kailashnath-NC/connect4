@@ -30,45 +30,61 @@ export default function Board({
 }: {
   board: number[][];
   updateBoard(newBoard: number[][]): void;
-  winner: 0 | 1 | 2;
-  updateWinner(player: 1 | 2): void;
+  winner: -1 | 0 | 1 | 2;
+  updateWinner(player: -1 | 1 | 2): void;
 }) {
   const [currentMove, setCurrentMove] = useState<number[]>([]);
   const [turn, setTurn] = useState(1);
 
   useEffect(() => {
-    if (winner == 0) setTurn(1);
-    setCurrentMove([]);
+    function resetWinner() {
+      if (winner == 0) setTurn(1);
+      setCurrentMove([]);
+    }
+
+    return resetWinner();
   }, [winner]);
 
   useEffect(() => {
-    const prevTurn = turn == 1 ? 2 : 1;
-    directions.forEach((direction) => {
-      let count = 1;
-      const c4Array: number[][] = [];
-      c4Array.splice(0, c4Array.length);
-      direction.forEach(([r, c]) => {
-        let rowIndex = currentMove[0] + r;
-        let colIndex = currentMove[1] + c;
-        while (
-          rowIndex >= 0 &&
-          rowIndex < ROWS &&
-          colIndex >= 0 &&
-          colIndex < COLUMNS
-        ) {
-          if (board[rowIndex][colIndex] !== prevTurn) break;
-          count++;
-          c4Array.push([rowIndex, colIndex]);
-          if (count === 4) {
-            updateWinner(prevTurn);
-            console.log(`player ${prevTurn} has won`);
+    function isDraw(): void {
+      if (winner === 0 && board[0].every((topCell) => topCell != 0)) {
+        updateWinner(-1);
+      }
+    }
+    return isDraw();
+  }, [board, winner, updateWinner]);
+
+  useEffect(() => {
+    function checkWinner() {
+      const prevTurn = turn == 1 ? 2 : 1;
+      directions.forEach((direction) => {
+        let count = 1;
+        const c4Array: number[][] = [];
+        c4Array.splice(0, c4Array.length);
+        direction.forEach(([r, c]) => {
+          let rowIndex = currentMove[0] + r;
+          let colIndex = currentMove[1] + c;
+          while (
+            rowIndex >= 0 &&
+            rowIndex < ROWS &&
+            colIndex >= 0 &&
+            colIndex < COLUMNS
+          ) {
+            if (board[rowIndex][colIndex] !== prevTurn) break;
+            count++;
+            c4Array.push([rowIndex, colIndex]);
+            if (count === 4) {
+              updateWinner(prevTurn);
+              console.log(`player ${prevTurn} has won`);
+            }
+            rowIndex += r;
+            colIndex += c;
           }
-          rowIndex += r;
-          colIndex += c;
-        }
+        });
+        // console.log(c4Array);
       });
-      // console.log(c4Array);
-    });
+    }
+    return checkWinner();
   }, [board, currentMove, turn, updateWinner]);
 
   function columnFilled(cIndex: number): boolean {

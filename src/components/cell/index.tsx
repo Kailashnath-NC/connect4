@@ -7,7 +7,7 @@ export default function Cell({
   cellData: number;
   cIndex: number;
   playTurn(index: number): void;
-  winner: 0 | 1 | 2;
+  winner: -1 | 0 | 1 | 2;
 }) {
   function handleTurn() {
     if (winner === 0) playTurn(cIndex);
